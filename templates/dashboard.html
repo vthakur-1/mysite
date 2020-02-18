@@ -1,0 +1,36 @@
+{% block content %}
+{% if request.user.is_authenticated %}
+  <li><a href="{% url 'account_logout' %}"> logout</a></li>
+{% endif %}
+<table>
+     {% if request.user.is_anonymous %}
+    <a href="{% url 'account_signup' %}"> signup</a>
+
+    <a href="{% url 'account_login' %}"> login</a>
+     {% endif %}
+<!--    <a href="{% url 'account_logout' %}"> logout</a>-->
+<a href="{% url 'add-album' %}"> Add Album</a>
+    <a href="{% url 'add-photo' album.id%}">add photos</a>
+
+<table>
+        <td> # </td>
+        <td> # </td>
+        <td> photographer</td>
+        <td> album name </td>
+        <td> view album </td>
+{% for album in album %}
+    <tr>
+        <td> {{album.profile.id}}</td>
+        <td> {{album.id}}</td>
+        <td> {{album.profile.user.username}} </td>
+        <td> {{album.name}} </td>
+        <td><a href="{% url 'view-photo' album.id%}">view photos</a></td>
+        <td><a href="{% url 'add-photo' album.id%}">add photos</a></tr></td>
+    </tr>
+{% endfor %}
+</table>
+
+
+
+
+{% endblock %}
